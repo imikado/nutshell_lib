@@ -96,7 +96,7 @@ class Pdo
         $whereList = array();
         $paramList = array();
 
-        $sql = 'DELETE ' . $table_ . ' ';
+        $sql = 'DELETE FROM ' . $table_ . ' ';
 
         foreach ($whereFieldValueList_ as $field => $value) {
             $whereList[] = $field . ' = ?';
