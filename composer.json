@@ -1,0 +1,23 @@
+{
+  "name": "nutshell/lib",
+  "description": "Micro framework",
+  "keywords": [
+    "framework"
+  ],
+  "homepage": "http://github.com/imikado/nutshell_lib",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Michael Bertocchi",
+      "homepage": "http://github.com/imikado/nutshell_lib"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nutshell\\": "src/"
+    }
+  }
+}
