@@ -50,36 +50,37 @@ class Pdo
     {
         $fieldList = array();
         $placeholderList = array();
-        $valueList = array();
+        $paramList = array();
+
         $sql = 'INSERT INTO ' . $table_ . ' ';
         foreach ($fieldValueList_ as $field => $value) {
             $placeholderList[] = '?';
             $fieldList[] = $field;
-            $valueList[] = $value;
+            $paramList[] = $value;
         }
         $sql .= ' (' . implode(',', $fieldList) . ') ';
         $sql .= ' VALUES ';
         $sql .= ' (' . implode(',', $placeholderList) . ') ';
 
         $sth = $this->dbh->prepare($sql);
-        return $sth->execute($valueList);
+        return $sth->execute($paramList);
     }
     public function update($table_, $whereFieldValueList_, $fieldValueList_)
     {
         $lineList = array();
         $whereList = array();
-        $valueList = array();
+        $paramList = array();
 
         $sql = 'UPDATE ' . $table_ . ' ';
         $sql .= 'SET ';
         foreach ($fieldValueList_ as $field => $value) {
             $lineList[] = $field . ' = ?';
-            $valueList[] = $value;
+            $paramList[] = $value;
         }
 
         foreach ($whereFieldValueList_ as $field => $value) {
             $whereList[] = $field . ' = ?';
-            $valueList[] = $value;
+            $paramList[] = $value;
         }
 
         $sql .= ' ' . implode(',', $lineList) . ' ';
@@ -87,6 +88,25 @@ class Pdo
         $sql .= ' ' . implode(' AND ', $whereList) . ' ';
 
         $sth = $this->dbh->prepare($sql);
-        return $sth->execute($valueList);
+        return $sth->execute($paramList);
+    }
+
+    public function delete($table_, $whereFieldValueList_)
+    {
+        $whereList = array();
+        $paramList = array();
+
+        $sql = 'DELETE ' . $table_ . ' ';
+
+        foreach ($whereFieldValueList_ as $field => $value) {
+            $whereList[] = $field . ' = ?';
+            $paramList[] = $value;
+        }
+
+        $sql .= 'WHERE ';
+        $sql .= ' ' . implode(' AND ', $whereList) . ' ';
+
+        $sth = $this->dbh->prepare($sql);
+        return $sth->execute($paramList);
     }
 }

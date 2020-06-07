@@ -36,4 +36,8 @@ abstract class Model
     {
         return $this->getSgbd()->update($this->table, $whereIdList_, $fieldValueList_);
     }
+    public function _delete($whereIdList_)
+    {
+        return $this->getSgbd()->delete($this->table, $whereIdList_);
+    }
 }
