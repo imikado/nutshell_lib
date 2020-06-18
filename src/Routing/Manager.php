@@ -28,7 +28,7 @@ class Manager
         );
     }
 
-    public function run()
+    public function process()
     {
         $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
 
@@ -50,6 +50,7 @@ class Manager
 
         if ($patternFound) {
             $this->status = self::STATUS_METHOD_NOT_ALLOWED;
+            return false;
         } else {
             $this->status = self::STATUS_ROUTE_NOT_FOUND;
         }
