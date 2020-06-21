@@ -14,7 +14,7 @@ class Manager
     const STATUS_METHOD_NOT_ALLOWED = 'METHOD_NOTALLOWED';
     const STATUS_ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 
-    public function __construct(\Nutshell\Http\Request $request_)
+    public function __construct(\Nutshell\Interfaces\Http\Request $request_)
     {
         $this->request = $request_;
     }
@@ -30,7 +30,7 @@ class Manager
 
     public function process()
     {
-        $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
+        $parsedUrl = parse_url($this->request->getUrl());
 
         $path = $parsedUrl['path'];
 
@@ -50,7 +50,6 @@ class Manager
 
         if ($patternFound) {
             $this->status = self::STATUS_METHOD_NOT_ALLOWED;
-            return false;
         } else {
             $this->status = self::STATUS_ROUTE_NOT_FOUND;
         }
