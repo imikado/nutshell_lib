@@ -1,7 +1,9 @@
-<?php 
+<?php
+
 namespace Nutshell\Interfaces\Http;
 
-interface Request{
+interface Request
+{
     public function getGetParam($param_, $default_ = null);
     public function getGetParamList();
     public function getPostParam($param_, $default_ = null);

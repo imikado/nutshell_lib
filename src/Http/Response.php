@@ -25,8 +25,12 @@ class Response
     public function display()
     {
         if ($this->type == self::HTTP_STATUS_METHODNOTALLOWED) {
-            header($this->getMethodAsked() . ' ' . self::HTTP_STATUS_METHODNOTALLOWED . ' Method Not Allowed', true, self::HTTP_STATUS_METHODNOTALLOWED);
-        } else if ($this->type == self::HTTP_STATUS_NOTFOUND) {
+            $headerList = array();
+            $headerList[] = $this->getMethodAsked();
+            $headerList[] = self::HTTP_STATUS_METHODNOTALLOWED;
+            $headerList[] = 'Method Not Allowed';
+            header(implode(' ', $headerList), true, self::HTTP_STATUS_METHODNOTALLOWED);
+        } elseif ($this->type == self::HTTP_STATUS_NOTFOUND) {
             header("HTTP/1.0 404 Not Found", true, self::HTTP_STATUS_NOTFOUND);
         }
 
